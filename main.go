@@ -12,6 +12,7 @@ type Config struct {
 	Engine   string `json:"engine"`
 	Search   string `json:"search"`
 	Fallback string `json:"fallback"`
+	Port     string `json:"port"`
 }
 
 func main() {
@@ -33,5 +34,5 @@ func main() {
 	app.Get("/:query", func(c *fiber.Ctx) error {
 		return c.Redirect(config.Engine + c.Params("query") + " " + config.Search)
 	})
-	app.Listen(":3000")
+	app.Listen(":" + config.Port)
 }
